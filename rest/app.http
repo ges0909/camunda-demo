@@ -1,0 +1,41 @@
+@base_url = http://localhost:8080/engine-rest
+
+###
+
+GET {{base_url}}/deployment
+
+###
+
+# @name definitions
+
+GET {{base_url}}/process-definition
+
+@id = {{definitions.response.body.$[0].id}}
+@key = {{definitions.response.body.$[0].key}}
+
+### start process by key
+
+POST {{base_url}}/process-definition/key/{{key}}/start
+Content-Type: application/json
+
+{
+  "variables": {}
+}
+
+### get process instances
+
+GET {{base_url}}/process-instance
+
+### get tasks
+
+# @name tasks
+
+GET {{base_url}}/task/?{{id}}
+Content-Type: application/json
+
+@task_id = {{tasks.response.body.$[0].id}}
+
+### complete the task
+
+POST {{base_url}}/task/{{task_id}}/complete
+Content-Type: application/json

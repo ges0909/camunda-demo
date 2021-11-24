@@ -1,0 +1,5 @@
+@base_url = http://localhost:8080
+
+### spring boot shutdown (requires 'actuator' module)
+
+POST {{base_url}}/actuator/shutdown
