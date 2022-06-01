@@ -1,4 +1,4 @@
-package workflow.demo.delegates;
+package workflow.demo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;

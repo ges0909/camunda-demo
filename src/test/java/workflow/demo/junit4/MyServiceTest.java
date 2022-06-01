@@ -21,13 +21,10 @@ class MyServiceTest extends AbstractProcessEngineRuleTest {
 
     @Test
     void shouldExecuteProcess() {
-        final String processDefinitionKey = "MyServiceProcess"; // Id
-
-        final ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey);
-
+        final ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("MyServiceProcess");
         assertThat(processInstance)
             .isStarted()
-            .hasPassed("RunTestStartEvent", "MyServiceTaskTask", "FinishTestEndEvent")
+            .hasPassed("StartStartEvent", "MyServiceTask", "EndEndEvent")
             .isEnded();
     }
 }

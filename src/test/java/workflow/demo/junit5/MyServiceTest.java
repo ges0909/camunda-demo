@@ -12,18 +12,17 @@ import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertT
 @SpringBootTest
 class MyServiceTest {
 
+    private final static String PROCESS_DEFINITION_KEY = "MyServiceProcess";
+
     @Inject
     private RuntimeService runtimeService;
 
     @Test
     void shouldExecuteProcess() {
-        final String processDefinitionKey = "MyServiceProcess"; // Id
-
-        final ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey);
-
+        final ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
         assertThat(processInstance)
             .isStarted()
-            .hasPassed("RunTestStartEvent", "MyServiceTaskTask", "FinishTestEndEvent")
+            .hasPassed("StartStartEvent", "MyServiceTask", "EndEndEvent")
             .isEnded();
     }
 }

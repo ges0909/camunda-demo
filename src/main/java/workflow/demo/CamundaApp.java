@@ -9,10 +9,11 @@ import javax.annotation.PreDestroy;
 
 @Slf4j
 @SpringBootApplication
-public class CamundaApplication {
+public class CamundaApp {
 
     public static void main(final String... args) {
-        SpringApplication.run(CamundaApplication.class, args);
+        try (var app = SpringApplication.run(CamundaApp.class, args)) {
+        }
     }
 
     @PostConstruct

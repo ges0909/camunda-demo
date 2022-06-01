@@ -8,7 +8,7 @@ import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import workflow.demo.delegates.MyServiceDelegate;
+import workflow.demo.MyServiceDelegate;
 
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.assertThat;
 
@@ -22,11 +22,7 @@ class MockedMyServiceTest {
     @Deployment(resources = {"my-service.bpmn"})
     void shouldExecuteProcess() {
         Mocks.register("MyServiceDelegate", new MyServiceDelegate());
-
-        final String processDefinitionKey = "MyServiceProcess"; // Id
-
-        final ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(processDefinitionKey);
-
+        final ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("MyServiceProcess");
         assertThat(processInstance)
             .isStarted()
             .hasPassed("RunTestStartEvent", "MyServiceTaskTask", "FinishTestEndEvent")
